@@ -60,7 +60,12 @@ class NovaToken
 
             $json = json_decode($data, true);
             // 验证时间戳（以秒为单位）
-            if (isset($json['t']) && $json['t'] >= time()) {
+            if (isset($json['t'])) {
+                if ($json['t'] >= time()) {
+                    return $json;
+                }
+
+            } else {
                 return $json;
             }
         }
