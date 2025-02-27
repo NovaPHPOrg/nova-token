@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright (c) 2025. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
  * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
@@ -21,8 +22,8 @@ class NovaToken
 {
     /**
      * 获取签名
-     * @param string $data 待签名数据
-     * @param string $key 密钥
+     * @param  string $data 待签名数据
+     * @param  string $key  密钥
      * @return string 返回签名
      */
     private static function sign(string $data, string $key): string
@@ -32,7 +33,7 @@ class NovaToken
 
     /**
      * 对密钥进行处理，确保其长度为32字节
-     * @param string $key 原始密钥
+     * @param  string $key 原始密钥
      * @return string 返回处理后的32字节密钥
      */
     private static function processKey(string $key): string
@@ -45,9 +46,9 @@ class NovaToken
 
     /**
      * 解码数据
-     * @param string $token 加密令牌
-     * @param string $key 密钥
-     * @param bool $encrypted 是否使用加密模式（默认为true）
+     * @param  string     $token     加密令牌
+     * @param  string     $key       密钥
+     * @param  bool       $encrypted 是否使用加密模式（默认为true）
      * @return array|bool 解密成功返回数组，失败返回false
      */
     public static function decode(string $token, string $key, bool $encrypted = true): array|bool
@@ -83,10 +84,10 @@ class NovaToken
 
     /**
      * 编码数据
-     * @param array $json 待加密的数组
-     * @param string $key 密钥
-     * @param int $timeout 超时时间（分钟），默认0分钟，不限制时间
-     * @param bool $encrypted 是否加密（默认为true）
+     * @param  array  $json      待加密的数组
+     * @param  string $key       密钥
+     * @param  int    $timeout   超时时间（分钟），默认0分钟，不限制时间
+     * @param  bool   $encrypted 是否加密（默认为true）
      * @return string 加密或签名后的令牌
      */
     public static function encode(array $json, string $key, int $timeout = 0, bool $encrypted = true): string
@@ -95,7 +96,7 @@ class NovaToken
         $key = self::processKey($key);
 
         // 设置时间戳（当前时间 + 超时时间，转换为秒）
-        if ($timeout > 0){
+        if ($timeout > 0) {
             $json['t'] =  time() + ($timeout * 60);
         }
 
